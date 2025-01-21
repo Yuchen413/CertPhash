@@ -24,37 +24,64 @@ Follow the steps below to set up the environment:
 
 This will install all the necessary packages for training and evaluation. 
 
-## Preparing datasets
-For robust training and evaluation, we use the following four datasets:
-- **COCO**: [Download Link](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz).
-- **MNIST**: A folder named "mnist" includes images and hashes. [Download Link]()
-- **CelabA**: Random Selection of 50,000 samples are used for training and 6,000 samples are used for verification. The dataset download link is TODO. 
-- **NSFW-56K**: The NSFW-56K dataset includes 56,000 images depicting explicit and unsafe content, all resized to 64x64 pixels. This dataset is used together with CelabA to assess CERTPHASH’s ability in real-world NSFW content detection. Due to ethical concerns, we do not attach a download link for this dataset.
+## Preparing Datasets
+We provide the [download link](https://drive.google.com/file/d/11LBjSRM-tqhJOKcRbxO8_8ZEabPdepUD/view?usp=sharing) for the datasets (images and phashes) we used. 
 
-After downloading the necessary datasets, you will need to place the datasets under `train_verify/data` according to the file hierarchy specified by `train_verify/data/put_data_here_follow_this.txt`.
+After downloading the above link, you will need to unzip and named the folder as `data`, then replace the current folder `train_verify/data` with the downloaded one.
+
+The file hierarchy is specified by `train_verify/data/put_data_here_follow_this.txt`.
+
+Note COCO need additional step as decribed below:
+
+For robust training and evaluation, we use the following four datasets:
+- **COCO**: ALSO need to download images from this [Link](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz) and unzip (named coco100x100), and then put the folder under the `train_verify/data`.
+- **MNIST**: A folder named "mnist" includes images and hashes.
+- **CelabA**: Random Selection of 50,000 samples are used for training and 6,000 samples are used for verification.
+- **NSFW-56K**: The NSFW-56K dataset includes 56,000 images depicting explicit and unsafe content, all resized to 64x64 pixels. This dataset is used together with CelabA to assess CertPhash’s ability in real-world NSFW content detection. Due to ethical concerns, we do not attach a download link for this dataset. Please follow this [repo](https://github.com/alex000kim/nsfw_data_scraper) to scape the images labeled as `porn`, and randomly selected 56,000 images as the NSFW dataset. And named the folder with 56,000 images as `porn_resized` and put it under `train_verify/data`. Then random split it into 50,000 and 6,000 for training and testing (See the `nsfw_train.csv` and `nsfw_val.csv` downloaded from the first link in this section as a reference for format), you can also have a copy of 6000 testing images into folder `porn_val`
+
+
+## Downloading our trained model
+We have released our certified robust trained model, adversarial trained model, and non-robust trained model in this [Download link.](https://drive.google.com/drive/folders/1b7RbO-uDdlvsxgsxE4H-tjrdGVx7pVRu?usp=sharing)
+Please download this folder named `saved_models` and replace it with the existing `train_verify/saved_models`.
+
 
 ## Setting up existing PHash models
-The code for hash generation with existing PHash models is under `generate_phash` folder. 
+The code for hash generation with existing PHash models is under `generate_phash` folder. Please first navigate to this folder via:
+
+```bash
+cd generate_phash
+```
 
 ### PyPhotoDNA setup
-We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to 
-1)	Clone the repo.
-2)	Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux.
-3)	Once the setup is complete, run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes.
+We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to
+1) Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should get a file with suffix `.dll`
+2) (You can skip this step at this time) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes.
 
 ### PDQ setup
 Please follow the [repo](https://github.com/faustomorales/pdqhash-python) to set up the PDQ Hash Model. Specifically, you will need to first run `pip install pdqhash` and then execute `python get_pdq_hash.py`.
 
 ### NeuralHash setup
-Please follow the guide provided by this [repo](https://github.com/ml-research/Learning-to-Break-Deep-Perceptual-Hashing), utilizing [AppleNeuralHash2ONNX](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX) to extract the NeuralHash model. For copyright reasons, we are unable to provide any NeuralHash files or models. Hash generation is under the ./attack folder.
+Please follow the guide provided by this [repo](https://github.com/ml-research/Learning-to-Break-Deep-Perceptual-Hashing), utilizing [AppleNeuralHash2ONNX](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX) to extract the NeuralHash model. For copyright reasons, we are unable to provide any NeuralHash files or models. Hash generation is under the `attack` folder.
 
-<!-- To extract the NeuralHash model from a recent macOS or iOS build, please follow the conversion guide provided by AppleNeuralHash2ONNX. We will not provide any NeuralHash files or models, neither this repo nor by request. After extracting the onnx model, put the file model.onnx into /models/. Further, put the extracted Core ML file neuralhash_128x96_seed1.dat into /models/coreml_model.
+To extract the NeuralHash model from a recent macOS or iOS build, please follow the conversion guide provided by AppleNeuralHash2ONNX. We will not provide any NeuralHash files or models, neither this repo nor by request. After extracting the onnx model, put the file model.onnx into `attack/models/`. Further, put the extracted Core ML file neuralhash_128x96_seed1.dat into `attack/models/coreml_model/`.
 
-To convert the onnx model into PyTorch, run the following command after creating folder models and putting model.onnx into it. The converted files will be stored at models/model.pth:
+To convert the onnx model into PyTorch, run the following command after creating folder models and putting model.onnx into it. The converted files will be stored at `attack/models/model.pth`:
 
-python utils/onnx2pytorch.py -->
+```bash
+python utils/onnx2pytorch.py
+```
+
+## Performing functional verification
+After downloading the datasets and models, we can do functional evaluation (RQ1 in our paper) using our trained model. We perform benign non-adversarial transformations on images such as rotation and brightness alterations and verify the ROC-AUC score. To perform such verification, you will first need to execute `attack/benign0_func_check.py` to generate hashes for transformed images and then execute `attack/benign0_func_AUC.py` to derive the ROC-AUC score. 
+
+A sample script for this two-step operation is enclosed in `attack/benign0.sh`.
+
+To Qichang: please test the benign0.sh one by one for each model, and copy the script seperately here, and just make sure they can run is enough.
 
 ## Training and verification
+
+Instead of using our models, you can also train and verify from scratch.
+
 ### Normal and robust training
 Both normal and robust training is conducted by executing `train_verify/train.py`. Different datasets require different configuration files, and normal versus robust training also each have their own specific configuration files. We provide the training script in `train_verify/train.sh`, which includes command lines for both **Robust Training** and **Normal Training** using the COCO and MNIST dataset. 
 
@@ -71,43 +98,39 @@ python train.py --config=config/mnist.normal.json --dir=saved_models/mnist_pdq_e
 ```
 
 ### Performing robust verification
-Robust verification involves verifying the CNER(Certified No Evasion Rate) and CNCR(Certified No Collision Rate) of the trained model. To derive the CNER, we run the `train_verify/verify_evasion.py`, specifying the perturbation epsilon and model path of the assessed model in the parameters. An example of verifying the CNER for a perturbation epsilon of 0.0312 for a non-robust PHash model trained on the COCO dataset could be like this:
+Robust verification involves verifying the CNER(Certified No Evasion Rate) and CNCR(Certified No Collision Rate) of the trained model. To derive the CNER, we run the `train_verify/verify_evasion.py`, specifying the perturbation epsilon and model path of the assessed model in the parameters. 
+
+An example of verifying the CNER for a perturbation epsilon of 0.0312 for a certified robust trained on the COCO dataset could be like this:
 ```bash
-python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/base_adv/coco-pdq-ep8-pdg.pt'
+python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep8/ckpt_best.pth'
 ```
 
-To derive the CNCR, we run verify_preimage.py under ./train_verify. An example of verifying the CNCR for a model trained on the MNIST dataset could be like this:
+And on non-robust PHash model trained:
 ```bash
-python verify_preimage.py --data=mnist --verify_epsilon=0.0078 --model='mnist-pdq-ep8-pdg.pt'
+python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep0/ckpt_best.pth'
 ```
+
+To derive the CNCR, we run `verify_preimage.py` under `./train_verify`. An example of verifying the CNCR for a model trained on the MNIST dataset could be like this:
+```bash
+python verify_preimage.py
+```
+
 You may find more scripts for model verification in `train_verify/verify.sh`.
 
 
-### Performing functional verification
-In functional verification, we perform benign non-adversarial transformations on images such as rotation and brightness alterations and verify the ROC-AUC score. To perform such verification, you will first need to execute `attack/benign0_func_check.py` to generate hashes for transformed images and then execute `attack/benign0_func_AUC.py` to derive the ROC-AUC score. A sample script for this two-step operation is enclosed in `attack/benign0.sh`.
-
 ### Empirical attacks
 #### Empirical collision attacks
-To perform empirical collision attacks, first derive the hash values of a dataset of choice using `utils/compute_dataset_hashes.py`, and then run `attack/adv1_collision_attack.py` to perform empirical collision attacks. 
-
-For example, you could run the following command line to evaluate a model trained on the COCO dataset.
-```bash
-python adv1_collision_attack.py --data=coco --epsilon=0.1 --model=../train_verify/saved_models/base_adv/coco-pdq-ep8-pdg.pt --output_folder=collision_test100_coco --source=/home/yuchen/code/verified_phash/train_verify/data/coco100x100_val --sample_limit=100 --threads=10 --learning_rate=5
-```
+To perform empirical collision attacks, first derive the hash values of a dataset of choice using `utils/compute_dataset_hashes.py` (only need once), and then run `attack/adv1_collision_attack.py` to perform empirical collision attacks. 
 
 Please refer to the scripts provided by `attack/adv1.sh` for more detailed command lines.
 
 #### Empirical evasion attacks
-To perform empirical evasion attacks, first derive the hash values of a dataset of choice using `utils/compute_dataset_hashes.py` if hashes haven't been generated yet, and then run `attack/adv2_evasion_attack.py` to perform empirical evasion attacks.
+Run `attack/adv2_evasion_attack.py` to perform empirical evasion attacks.
 
-Below is an example of conducting empirical evasion attacks on a model trained on the COCO dataset.
-```bash
-python adv2_evasion_attack.py --data=coco --epsilon=0.034 --model=../train_verify/saved_models/coco_photodna_ep0/last_epoch_state_dict.pth --output_folder=evasion_test100_coco --source=/home/yuchen/code/verified_phash/train_verify/data/coco100x100_val --sample_limit=100 --threads=10 --learning_rate=1
-```
 Again, please refer to the scripts provided by `attack/adv2.sh` for more detailed examples.
 
 ### Real-world evaluations on NSFW data
-In our work, we adopt the NSFW dataset together with the CelabA dataset to assess our model's ability in NSFW detection. The dataset will be made available exclusively for research purposes, and both the dataset and the model will require a password for access.
+In our work, we adopt the NSFW dataset together with the CelabA dataset to assess our model's ability in NSFW detection. Please follow the data preparation section for both datasets.
 
 <!-- ## Citation
 Please don't forget to cite us if you use our code! -->

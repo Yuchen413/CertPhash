@@ -1,7 +1,7 @@
 ##Example for coco dataset
 
-python verify_evasion.py --data=coco --epsilon=0.0312 --model='coco_photodna_ep1/ckpt_best.pth' # certphash trained with eps=1/255
-#python verify_evasion.py --data=coco --epsilon=0.0312 --model='coco_photodna_ep0/ckpt_best.pth' # means non-robust trained
+python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep8/ckpt_best.pth' # certphash trained with eps=8/255
+#python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep0/ckpt_best.pth' # means non-robust trained
 #python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/base_adv/coco-pdq-ep8-pdg.pt' # for adversarial trained with eps=8/255
 
 
