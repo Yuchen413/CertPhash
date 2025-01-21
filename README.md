@@ -5,8 +5,14 @@ Perceptual hashing (PHash) systems—e.g., Apple’s NeuralHash, Microsoft’s P
 In this paper, we propose CERTPHASH, the first certified PHash system with robust training. CERTPHASH includes three different optimization terms, anti-evasion, anti-collision, and functionality. The anti-evasion term establishes an upper bound on the hash deviation caused by input perturbations, the anti-collision term sets a lower bound on the distance between a perturbed hash and those from other inputs, and the functionality term ensures that the system remains reliable and effective throughout robust training. Our results demonstrate that CERTPHASH not only achieves non-vacuous certification for both evasion and collision with provable guarantees but is also robust against empirical attacks. Furthermore, CERTPHASH demonstrates strong performance in real-world illicit content detection tasks.
 
 
-## Environment Setup
+# Setup
+
+TO Qichang: describe Git clone our repo then navigate to via cd CertPhash
+
+## Installing environment
 Follow the steps below to set up the environment:
+
+To Qichang: please first mention conda virtual environment here, including, if you don't have conda, follow some link to install. Then also includes env creation and named it as certphash and activate it, then download the following dependencies. 
 
 1. **Install basic dependencies**:
    - Install the required dependencies by running:
@@ -24,17 +30,19 @@ Follow the steps below to set up the environment:
 
 This will install all the necessary packages for training and evaluation. 
 
-## Preparing Datasets
+## Preparing datasets
+The file hierarchy is specified by `./train_verify/data/put_data_here_follow_this.txt`.
+
 We provide the [download link](https://drive.google.com/file/d/11LBjSRM-tqhJOKcRbxO8_8ZEabPdepUD/view?usp=sharing) for the datasets (images and phashes) we used. 
 
 After downloading the above link, you will need to unzip and named the folder as `data`, then replace the current folder `train_verify/data` with the downloaded one.
 
-The file hierarchy is specified by `train_verify/data/put_data_here_follow_this.txt`.
+
 
 Note COCO need additional step as decribed below:
 
 For robust training and evaluation, we use the following four datasets:
-- **COCO**: ALSO need to download images from this [Link](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz) and unzip (named coco100x100), and then put the folder under the `train_verify/data`.
+- **COCO**: ALSO need to download images from this [Link](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz) and unzip (named coco100x100), and then put the folder under the `./train_verify/data`.
 - **MNIST**: A folder named "mnist" includes images and hashes.
 - **CelabA**: Random Selection of 50,000 samples are used for training and 6,000 samples are used for verification.
 - **NSFW-56K**: The NSFW-56K dataset includes 56,000 images depicting explicit and unsafe content, all resized to 64x64 pixels. This dataset is used together with CelabA to assess CertPhash’s ability in real-world NSFW content detection. Due to ethical concerns, we do not attach a download link for this dataset. Please follow this [repo](https://github.com/alex000kim/nsfw_data_scraper) to scape the images labeled as `porn`, and randomly selected 56,000 images as the NSFW dataset. And named the folder with 56,000 images as `porn_resized` and put it under `train_verify/data`. Then random split it into 50,000 and 6,000 for training and testing (See the `nsfw_train.csv` and `nsfw_val.csv` downloaded from the first link in this section as a reference for format), you can also have a copy of 6000 testing images into folder `porn_val`
@@ -42,7 +50,11 @@ For robust training and evaluation, we use the following four datasets:
 
 ## Downloading our trained model
 We have released our certified robust trained model, adversarial trained model, and non-robust trained model in this [Download link.](https://drive.google.com/drive/folders/1b7RbO-uDdlvsxgsxE4H-tjrdGVx7pVRu?usp=sharing)
-Please download this folder named `saved_models` and replace it with the existing `train_verify/saved_models`.
+Please download this folder named `saved_models` and replace it with the existing `./train_verify/saved_models`.
+
+## Environment functional test
+
+To Qichang: Please write a one epoch training script for mnist, remember to rename the saved folder as test. Then describe the expected output in log.
 
 
 ## Setting up existing PHash models
@@ -54,7 +66,7 @@ cd generate_phash
 
 ### PyPhotoDNA setup
 We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to
-1) Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should get a file with suffix `.dll`
+1) Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should have a file with suffix `.dll` which is the PhotoDNA.
 2) (You can skip this step at this time) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes.
 
 ### PDQ setup
@@ -71,7 +83,10 @@ To convert the onnx model into PyTorch, run the following command after creating
 python utils/onnx2pytorch.py
 ```
 
-## Performing functional verification
+
+# Experiment
+
+## Functional evaluation
 After downloading the datasets and models, we can do functional evaluation (RQ1 in our paper) using our trained model. We perform benign non-adversarial transformations on images such as rotation and brightness alterations and verify the ROC-AUC score. To perform such verification, you will first need to execute `attack/benign0_func_check.py` to generate hashes for transformed images and then execute `attack/benign0_func_AUC.py` to derive the ROC-AUC score. 
 
 A sample script for this two-step operation is enclosed in `attack/benign0.sh`.
