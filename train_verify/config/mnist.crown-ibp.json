@@ -1,0 +1,13 @@
+{
+    "model": "resnet",
+    "data": "MNIST",
+    "batch_size": 64,
+    "bound_params": {
+        "eps": 0.0,
+        "bound_type": "CROWN-Optimized",
+        "bound_opts": {
+            "relu": "adaptive",
+            "exp": "clamp_constant"
+        }         
+    }
+}

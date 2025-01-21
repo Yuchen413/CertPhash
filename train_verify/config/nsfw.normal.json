@@ -1,0 +1,5 @@
+{
+    "model": "coco_photodna",
+    "data": "nsfw",
+    "batch_size": 64
+}

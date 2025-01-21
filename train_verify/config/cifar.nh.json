@@ -1,0 +1,12 @@
+{
+    "data": "NH",
+    "batch_size": 64,
+    "bound_params": {
+        "eps": 0.0007,
+        "bound_type": "IBP",
+        "bound_opts": {
+            "relu": "adaptive",
+            "exp": "clamp_constant"
+        }
+    }
+}

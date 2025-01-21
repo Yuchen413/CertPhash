@@ -1,0 +1,18 @@
+-coco100x100
+    -.jpg
+-coco100x100_val
+    -.jpg
+-coco-train.csv
+-coco-val.csv
+-mnist
+    -testing
+        -.jpg
+    -training
+        -.jpg
+    -mnist_test.csv
+    -mnist_train.csv
+-celeba_random
+-porn_resized
+-nsfw_train.csv
+-nsfw_val.csv
+

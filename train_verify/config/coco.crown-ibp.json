@@ -1,0 +1,13 @@
+{
+    "model": "coco_photodna",
+    "data": "coco",
+    "batch_size": 64,
+    "bound_params": {
+        "eps": 0.0,
+        "bound_type": "CROWN-IBP",
+        "bound_opts": {
+            "relu": "adaptive",
+            "exp": "clamp_constant"
+        }         
+    }
+}

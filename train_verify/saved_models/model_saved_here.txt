@@ -1,0 +1,2 @@
+Use '--dir=saved_models/model_name'
+Please make sure you have 'photodna' or 'pdq' in 'model_name'. See example in train.sh

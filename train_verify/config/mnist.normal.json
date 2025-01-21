@@ -1,0 +1,5 @@
+{
+    "model": "resnet",
+    "data": "MNIST_normal",
+    "batch_size": 64
+}
