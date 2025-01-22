@@ -67,9 +67,13 @@ For robust training and evaluation, we use the following four datasets:
   - Optionally, you can place a copy of the 6,000 testing images in the `porn_val` folder.
 
 
-## Downloading our trained model-
+## Downloading our trained model
 We have released our certified robust trained model, adversarial trained model, and non-robust trained model in this [Download link.](https://drive.google.com/drive/folders/1b7RbO-uDdlvsxgsxE4H-tjrdGVx7pVRu?usp=sharing)
 Please download this folder named `saved_models` and replace it with the existing `train_verify/saved_models`.
+
+
+## Environment functional test
+To test whether the environment has been set up correctly, please run `./train_verify/test.sh` and `./attack/test.sh`. The expected output for `./train_verify/test.sh` should be like `./train_verify/test/train_log.txt`.
 
 
 ## Setting up existing PHash models
