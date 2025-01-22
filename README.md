@@ -37,12 +37,14 @@ conda activate certphash
 
 This will install all the necessary packages for training and evaluation. 
 
-## Preparing Datasets
+## Preparing datasets
+The file hierarchy is specified by `./train_verify/data/put_data_here_follow_this.txt`.
+
 We provide the [download link](https://drive.google.com/file/d/11LBjSRM-tqhJOKcRbxO8_8ZEabPdepUD/view?usp=sharing) for the datasets (images and phashes) we used. 
 
 After downloading the above link, you will need to unzip and named the folder as `data`, then replace the current folder `train_verify/data` with the downloaded one.
 
-The file hierarchy is specified by `train_verify/data/put_data_here_follow_this.txt`.
+
 
 Note that for the COCO dataset, you will need to perform an additional step as described below:
 
@@ -69,7 +71,11 @@ For robust training and evaluation, we use the following four datasets:
 
 ## Downloading our trained model
 We have released our certified robust trained model, adversarial trained model, and non-robust trained model in this [Download link.](https://drive.google.com/drive/folders/1b7RbO-uDdlvsxgsxE4H-tjrdGVx7pVRu?usp=sharing)
-Please download this folder named `saved_models` and replace it with the existing `train_verify/saved_models`.
+Please download this folder named `saved_models` and replace it with the existing `./train_verify/saved_models`.
+
+## Environment functional test
+
+To Qichang: Please write a one epoch training script for mnist, remember to rename the saved folder as test. Then describe the expected output in log.
 
 
 ## Environment functional test
@@ -85,7 +91,7 @@ cd generate_phash
 
 ### PyPhotoDNA setup
 We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to
-1) Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should get a file with suffix `.dll`
+1) Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should have a file with suffix `.dll` which is the PhotoDNA.
 2) (You can skip this step at this time) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes.
 
 ### PDQ setup
@@ -102,7 +108,11 @@ To convert the onnx model into PyTorch, run the following command after creating
 python utils/onnx2pytorch.py
 ```
 
-## Performing functional verification
+
+# Experiment
+
+## Functional evaluation
+After downloading the datasets and models, we can do functional evaluation (RQ1 in our paper) using our trained model. We perform benign non-adversarial transformations on images such as rotation and brightness alterations and verify the ROC-AUC score. To perform such verification, you will first need to execute `attack/benign0_func_check.py` to generate hashes for transformed images and then execute `attack/benign0_func_AUC.py` to derive the ROC-AUC score. 
 
 After downloading the datasets and models, you can perform functional evaluation (RQ1 in our paper) using the trained model. The goal of this evaluation is to assess how the model performs under benign, non-adversarial transformations. These transformations include operations like rotation and brightness alterations, which help verify the model's performance in terms of the ROC-AUC score.
 
