@@ -274,7 +274,7 @@ def main():
         'vflip': ([0], 1),
         'downsizing': (list(filter(lambda x: x != 63, [64] + list(64 - np.append(np.logspace(0, 5, 6, base=2, endpoint=True, dtype=int), [32])))),9),
         'perceptive': (list([0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5]), 9),
-        'gaussianBlur': (list([0.0001, 1, 2, 3, 4, 5, 6, 8, 10]), 9),
+        'gaussianBlur': (list([0, 1, 2, 3, 4, 5, 6, 8, 10]), 9),
         'erasing': (list(np.linspace(0, 0.3, 6, endpoint=True)), 9),
         'gray': (list(np.linspace(0, 1, 9, endpoint=True)),9),
         'resizing': (list([100, 80, 64, 56, 48, 32]),6),

@@ -311,7 +311,7 @@ def main():
     )
 
     perceptive_values = list([0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5])
-    gaussianBlur_values = list([0.00000001, 1, 2, 3, 4, 5, 6, 8, 10])
+    gaussianBlur_values = list([0.0000000001, 1, 2, 3, 4, 5, 6, 8, 10])
     erasing_values = list(np.linspace(0, 0.3, 6, endpoint=True))
     gray_values = list(np.linspace(0, 1, 9, endpoint=True))
     resize_values = list([100, 80, 64, 56, 48, 32])
@@ -507,8 +507,9 @@ def main():
         device,
         GaussianBlur,
         gaussianBlur_values,
-        [os.path.join(output_dir, 'gaussianBlur', f'{args.dataset}_gaussianBlur_{size}.csv') for size in gaussianBlur_values],
-        batch_size=args.batch_size,
+        [os.path.join(output_dir, 'gaussianBlur', f'{args.dataset}_gaussianBlur_{0 if size < 0.001 else size}.csv') for
+         size in gaussianBlur_values],
+    batch_size=args.batch_size,
         num_workers=args.num_workers,
         target=args.target,
         seed = seed

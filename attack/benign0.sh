@@ -30,23 +30,22 @@
 ##Step 1:
 # python benign0_func_check.py --dataset='coco_val' --target='photodna' ##This is actually save the images, then needs to use the generate_phash to get the .csv
 #
-###Step 2:
+
+##Step 2:
 #cd ../generate_phash
-#WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py --root="../attack/func_logs/coco_val_photodna/pepperSalt" --benign_func_test
-#
-##main_root="../attack/func_logs/coco_val_photodna"
-##for subroot in "$main_root"/*; do
-##    if [ -d "$subroot" ]; then
-##        echo "Processing folder: $subroot"
-##        WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py --root="$subroot" --benign_func_test
-##        if [ $? -eq 0 ]; then
-##            echo "Completed successfully: $subroot"
-##        else
-##            echo "Error processing: $subroot" >&2
-##        fi
-##    fi
-##done
-#
+#main_root="../attack/func_logs/coco_val_photodna"
+#for subroot in "$main_root"/*; do
+#    if [ -d "$subroot" ]; then
+#        echo "Processing folder: $subroot"
+#        WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py --root="$subroot" --benign_func_test
+#        if [ $? -eq 0 ]; then
+#            echo "Completed successfully: $subroot"
+#        else
+#            echo "Error processing: $subroot" >&2
+#        fi
+#    fi
+#done
+
 ###Step 3:
 #cd ../attack
 #python benign0_func_AUC.py --dataset='coco_val' --target='photodna'

@@ -12,7 +12,9 @@
     -mnist_test.csv
     -mnist_train.csv
 -celeba_random
+    -.jpg
 -porn_resized
+    -.jpg
 -nsfw_train.csv
 -nsfw_val.csv
 
