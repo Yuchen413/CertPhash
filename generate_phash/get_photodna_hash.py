@@ -70,6 +70,7 @@ parser.add_argument('--benign_func_test', action='store_true', help='only used f
 args = parser.parse_args()
 
 if __name__ == '__main__':
+	## If generated from specific root (image folder)
 	# root = '../attack/func_logs/coco_val_photodna/brightness'
 	# root = '../train_verify/data/mnist/testing'
 	# root = '../train_verify/data/celeba'
@@ -78,9 +79,6 @@ if __name__ == '__main__':
 
 	root = args.root
 	benign_func_test = args.benign_func_test
-	# if args.benign_test:
-	# 	roots = [os.path.join(args.root, f.name) for f in os.scandir(args.root) if f.is_dir() and f.name != 'coco_val_original']
-	# else: roots = [args.root]
 
 	inputFolders, SavedFolder = check_subfolders(root)
 	outputFolder = os.getcwd()

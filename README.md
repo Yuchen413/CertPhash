@@ -222,7 +222,8 @@ python benign0_func_AUC.py --dataset='coco_val' --target='pdq'
 #### PyPhotoDNA
 - We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to:
   - Navigate to folder via `cd ../generate_phash` (assume you are at `attack` folder)
-  - Run `install.bat` if you are on Windows, or `install.sh` if you are on a Mac or Linux. Then you should have a file with suffix `.dll` which is the PhotoDNA.
+  - Install `wine64` if you are on a Linux via `sudo apt-get install wine-stable-dev`
+  - Run `install.bat` if you are on Windows, or `install.sh` if you are on a Linux. Then you should have a file with suffix `.dll` which is the PhotoDNA.
   - (Skip this step at this time) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes. Remember to modify the image folder name and saved .csv file name in `get_photodna_hash.py` if you want to generate PHahses for your own datasets (Note: this step is needed if you want to generate the phash labels for NSFW datasets you collect).
 
 - For evaluating PhotoDNA on the COCO validation dataset, use these commands:
