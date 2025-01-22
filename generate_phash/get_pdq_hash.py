@@ -27,7 +27,7 @@ for subdir, dirs, files in os.walk(root):
         hash_vector, quality = pdqhash.compute(image)
 
         # Extract the relative path starting from 'testing/'
-        relative_path = os.path.relpath(file_path, '../data')
+        relative_path = os.path.relpath(file_path, '../train_verify/data')
 
         # Append the path and hash_vector to the data list
         data.append([relative_path, hash_vector])
@@ -36,7 +36,7 @@ for subdir, dirs, files in os.walk(root):
 df = pd.DataFrame(data)
 
 # Save the DataFrame to a CSV file without headers
-df.to_csv(os.path.join('../Normal-Training/mnist','mnist_train.csv'), index=False, header=False)
+df.to_csv(os.path.join('../train_verify/data/mnist','mnist_train.csv'), index=False, header=False)
 
 #I want to imurate all images under root, and generate the hash, then save it with name mnist_test.csv, with two collomns. The first one is the path of the image, start with 'testing/', the second is the hash vector
 

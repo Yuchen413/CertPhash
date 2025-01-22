@@ -1,0 +1,2 @@
+# MNIST + PDQ, train for one epoch to test enrironment setup
+python train.py --method=fast --config=config/mnist.crown-ibp.json --eps=0.0039 --dir=one_epoch_test --scheduler_opts=start=1,length=20 --lr-decay-milestones=50,60 --lr-decay-factor=0.2 --num-epochs=1  --model='resnet' --lr=5e-4

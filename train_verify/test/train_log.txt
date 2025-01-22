@@ -1,0 +1,111 @@
+Regularizer: True
+Manual initialization: True
+INFO     14:56:01     Arguments: Namespace(auto_load=False, batch_size=None, bound_type='IBP', check_nan=False, colt_coeff=0, complete=False, config='config/mnist.crown-ibp.json', debug=False, device='cuda', dir='one_epoch_test', eps=0.0039, eval=False, fix_eps=False, global_lip=False, grad_acc_steps=1, grad_norm=10.0, init_eps=None, init_method='ibp', kaiming_init=False, l1_coeff=1e-05, length=None, lip=False, load='', log_interval=1000, loss='ce', loss_fusion=False, lr=0.0005, lr_decay_factor=0.2, lr_decay_milestones='50,60', ls=0.0, manual_init=True, method='fast', min_eps=0, min_eps_reg=1e-06, mode='cert', model='resnet', model_params='', momentum=0.9, multi_gpu=False, natural=False, no_data_aug=False, no_init=False, no_loss_fusion=False, no_reg_dec=False, num_class=10, num_epochs=1, num_reg_epochs=20, opt='Adam', plot=False, random_crop=2, reg=True, reg_lambda=0.5, reg_obj=['relu', 'tightness'], save_all=False, scheduler_name='SmoothedScheduler', scheduler_opts='start=1,length=20', seed=None, test_batch_size=None, test_interval=1, tol=0.5, train_eps_mul=1.0, verify=False, vol_reg=False, w_scale_cls=100, weight_decay=0, xiao_coeff=1e-05, xiao_reg=False)
+Namespace(auto_load=False, batch_size=None, bound_type='IBP', check_nan=False, colt_coeff=0, complete=False, config='config/mnist.crown-ibp.json', debug=False, device='cuda', dir='one_epoch_test', eps=0.0039, eval=False, fix_eps=False, global_lip=False, grad_acc_steps=1, grad_norm=10.0, init_eps=None, init_method='ibp', kaiming_init=False, l1_coeff=1e-05, length=None, lip=False, load='', log_interval=1000, loss='ce', loss_fusion=False, lr=0.0005, lr_decay_factor=0.2, lr_decay_milestones='50,60', ls=0.0, manual_init=True, method='fast', min_eps=0, min_eps_reg=1e-06, mode='cert', model='resnet', model_params='', momentum=0.9, multi_gpu=False, natural=False, no_data_aug=False, no_init=False, no_loss_fusion=False, no_reg_dec=False, num_class=10, num_epochs=1, num_reg_epochs=20, opt='Adam', plot=False, random_crop=2, reg=True, reg_lambda=0.5, reg_obj=['relu', 'tightness'], save_all=False, scheduler_name='SmoothedScheduler', scheduler_opts='start=1,length=20', seed=None, test_batch_size=None, test_interval=1, tol=0.5, train_eps_mul=1.0, verify=False, vol_reg=False, w_scale_cls=100, weight_decay=0, xiao_coeff=1e-05, xiao_reg=False)
+INFO     14:56:01     Loading config file: config/mnist.crown-ibp.json
+INFO     14:56:01     config: {"data": "MNIST", "seed": 100, "training_params": {"method": "robust", "batch_size": 128}, "bound_params": {"eps": 0.0, "bound_opts": {"relu": "adaptive", "exp": "clamp_constant"}, "bound_type": "CROWN-Optimized"}, "model": "resnet", "batch_size": 64}
+INFO     14:56:02     Model structure: 
+ DenseSequential(
+  (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(3, 3))
+  (1): ReLU()
+  (2): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (3): ReLU()
+  (4): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1))
+      (1): None
+      (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (5): ReLU()
+  (6): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (7): ReLU()
+  (8): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1))
+      (1): None
+      (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (9): ReLU()
+  (10): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (11): ReLU()
+  (12): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(16, 32, kernel_size=(2, 2), stride=(2, 2))
+      (1): None
+      (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (13): ReLU()
+  (14): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(32, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    )
+  )
+  (15): ReLU()
+  (16): Dense(
+    (Ws): ModuleList(
+      (0): Conv2d(32, 64, kernel_size=(2, 2), stride=(2, 2))
+      (1): None
+      (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (17): ReLU()
+  (18): Flatten(start_dim=1, end_dim=-1)
+  (19): Linear(in_features=4096, out_features=1000, bias=True)
+  (20): ReLU()
+  (21): Linear(in_features=1000, out_features=256, bias=True)
+)
+Reinitialize 0.weight, std before 0.12814, std now 0.27070
+Reinitialize 2.Ws.0.weight, std before 0.11594, std now 0.01721
+Reinitialize 4.Ws.0.weight, std before 0.36127, std now 0.14884
+Reinitialize 4.Ws.2.weight, std before 0.12368, std now 0.01768
+Reinitialize 6.Ws.0.weight, std before 0.11871, std now 0.01781
+Reinitialize 8.Ws.0.weight, std before 0.32829, std now 0.16277
+Reinitialize 8.Ws.2.weight, std before 0.11977, std now 0.01759
+Reinitialize 10.Ws.0.weight, std before 0.06245, std now 0.00962
+Reinitialize 12.Ws.0.weight, std before 0.12870, std now 0.03889
+Reinitialize 12.Ws.2.weight, std before 0.08296, std now 0.00861
+Reinitialize 14.Ws.0.weight, std before 0.04399, std now 0.00487
+Reinitialize 16.Ws.0.weight, std before 0.08891, std now 0.01979
+Reinitialize 16.Ws.2.weight, std before 0.05932, std now 0.00432
+Reinitialize 19.weight, std before 0.00902, std now 0.00061
+Adjust weights for node /39 due to residual connection
+Adjust weights for node /41 due to residual connection
+Adjust weights for node /45 due to residual connection
+Adjust weights for node /47 due to residual connection
+Adjust weights for node /51 due to residual connection
+Adjust weights for node /53 due to residual connection
+INFO     14:56:08     Parameter shapes: [torch.Size([16, 1, 3, 3]), torch.Size([16]), torch.Size([16, 16, 3, 3]), torch.Size([16]), torch.Size([16, 16, 1, 1]), torch.Size([16]), torch.Size([16, 16, 3, 3]), torch.Size([16]), torch.Size([16, 16, 3, 3]), torch.Size([16]), torch.Size([16, 16, 1, 1]), torch.Size([16]), torch.Size([16, 16, 3, 3]), torch.Size([16]), torch.Size([32, 16, 4, 4]), torch.Size([32]), torch.Size([32, 16, 2, 2]), torch.Size([32]), torch.Size([32, 32, 3, 3]), torch.Size([32]), torch.Size([64, 32, 4, 4]), torch.Size([64]), torch.Size([64, 32, 2, 2]), torch.Size([64]), torch.Size([64, 64, 3, 3]), torch.Size([64]), torch.Size([1000, 4096]), torch.Size([1000]), torch.Size([256, 1000]), torch.Size([256])]
+INFO     14:56:08     Optimizer Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0005
+    maximize: False
+    weight_decay: 0
+)
+INFO     14:56:08     Epoch 1, learning rate [0.0005], dir one_epoch_test
+INFO     14:57:37     [ 1]: eps=0.00000048 active=0.3465 inactive=0.6532 Loss=0.4681 Rob_Loss=0.4681 Err=1.0000 Rob_Err=1.0000 L_tightness=0.5494 L_relu=0.0023 L_std=0.8852 loss_reg=0.5518 grad_norm=15.2293 wnorm=13.1858 Time=0.0517
+INFO     14:57:37     Epoch time: 89.7217, Total time: 89.7217
+INFO     14:57:37     Test without loss fusion
+INFO     14:57:42     [ 1]: eps=0.00000048 active=0.3509 inactive=0.6491 Loss=0.4642 Rob_Loss=0.4642 Err=1.0000 Rob_Err=1.0000 L_tightness=0.0000 L_relu=0.0000 L_std=0.8729 loss_reg=0.0000 wnorm=14.8170 Time=0.0218
+INFO     14:57:42  

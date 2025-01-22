@@ -1,5 +1,5 @@
 ### This is for CertPHash
-#python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_cert_ep1' --model='../train_verify/saved_models/coco_photodna_ep1/ckpt_best.pth'
+# python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_cert_ep1' --model='../train_verify/saved_models/coco_photodna_ep1/ckpt_best.pth'
 #python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_cert_ep1'
 
 
@@ -28,7 +28,7 @@
 
 ####This is for photodna
 ##Step 1:
-#python benign0_func_check.py --dataset='coco_val' --target='photodna' ##This is actually save the images, then needs to use the generate_phash to get the .csv
+# python benign0_func_check.py --dataset='coco_val' --target='photodna' ##This is actually save the images, then needs to use the generate_phash to get the .csv
 #
 ###Step 2:
 #cd ../generate_phash
