@@ -104,7 +104,7 @@ Test without loss fusion
 [ 1]: eps=0.00000048 active=0.3509 inactive=0.6491 Loss=0.4642 Rob_Loss=0.4642 Err=1.0000 Rob_Err=1.0000 L_tightness=0.0000 L_relu=0.0000 L_std=0.8729 loss_reg=0.0000 wnorm=14.8170 Time=0.0218
 ```
 
-### 1. Testing the functionality
+### 2. Testing the functionality
 
 - To test if our certified robust trained model functions as expected, please first run:
 ```bash
