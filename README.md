@@ -1,4 +1,4 @@
-# CertPHah: Towards Certified Perceptual Hashing via Robust Training
+# CertPHash: Towards Certified Perceptual Hashing via Robust Training
 
 
 <!-- CERTPHASH is the first certified perceptual hashing (PHash) system designed to provide provable robustness against both evasion and collision attacks. Using verifier tools, CERTPHASH is trained on a robust method that incorporates anti-evasion, anti-collision and functionality optimization terms, and is able to withstand adversarial perturbations while maintaining functional utility. Being the first certified PHash system with robust training, it is a powerful tool for detecting illicit content in real-world applications.  -->
@@ -95,7 +95,7 @@ To test whether the environment has been set up correctly, please run the follow
 ```bash
 bash ./train_verify/test.sh
 ```
-The expected output for `./train_verify/test.sh` should be like `./train_verify/test/train_log.txt`, end up with something like following:
+The expected output for `./train_verify/test.sh` should be like `./train_verify/test/train_log.txt`, a.k.a. something like the following:
 ```angular2html
 Epoch 1, learning rate [0.0005], dir one_epoch_test
 [ 1]: eps=0.00000048 active=0.3465 inactive=0.6532 Loss=0.4681 Rob_Loss=0.4681 Err=1.0000 Rob_Err=1.0000 L_tightness=0.5494 L_relu=0.0023 L_std=0.8852 loss_reg=0.5518 grad_norm=15.2293 wnorm=13.1858 Time=0.0517
@@ -130,7 +130,7 @@ ROC AUC: 1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1
 Mean ROC AUC: 1.0000, Std ROC AUC: 0.0000
 ...
 ```
-The full results will be saved in `./attack/func_logs/coco_val_photodna_nn_cert_ep1/coco_val_results.txt`. This results should align with our paper's RQ1
+The full results will be saved in `./attack/func_logs/coco_val_photodna_nn_cert_ep1/coco_val_results.txt`. These results should align with our paper's RQ1.
 
 
 
