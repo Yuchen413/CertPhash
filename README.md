@@ -207,11 +207,11 @@ python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_adv'
 
 
 ### (Optional) Existing PHash algorithms/models from other sources
-We also provide the implementation and evaluation scripts for existing PHash systems (PhotoDNA, PDQ, NuralHash). However, we cannot directly provide the extracted algorithms/models (following existing repos) due to copyright issues.
+We also provide the implementation and evaluation scripts for existing PHash systems (PhotoDNA, PDQ, NeuralHash). However, we cannot directly provide the extracted algorithms/models (following existing repos) due to copyright issues.
 
 #### PDQ
 
-- Please follow the [repo](https://github.com/faustomorales/pdqhash-python) to set up the PDQ Hash Model. Specifically, you will need to first run `pip install pdqhash` and then execute `python get_pdq_hash.py`.
+- Please follow the [repo](https://github.com/faustomorales/pdqhash-python) to set up the PDQ Hash Model. Specifically, you will need to first run `pip install pdqhash` and then execute `python get_pdq_hash.py`. 
 
 - For evaluating PDQ on the COCO validation dataset, use these commands:
 ```bash
