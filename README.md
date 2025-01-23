@@ -180,14 +180,14 @@ To perform the verification, follow the steps below. The process involves two ke
 
 The results will be saved under `./attack/func_logs/`. 
 
-You will need to navigate to `./attack` folder first before running the below scripts. The detailed scripts can be found in `./attack/benign0.sh` with detailed comments. We also show the step-by-step instructions below.
+You will need to navigate to `./attack` folder first before running the below scripts. The detailed scripts can be found in `./attack/benign0.sh` with detailed comments. We also list the step-by-step instructions below.
 
 ### Phash models trained by us
 
-Please run the following script one by one if you have download the models or train your own models.
+Please run the following script one by one if you have downloaded our models or trained your own models.
 
 #### Certified robust trained (CertPHash)
-This is the same as previous *Testing the functionality*.
+This script is the same as the previous one in *Testing the functionality*.
 ```bash
 python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_cert_ep1' --model='../train_verify/saved_models/coco_photodna_ep1/ckpt_best.pth'
 python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_cert_ep1'
@@ -199,15 +199,15 @@ python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_ep0' --m
 python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_ep0'
 ```
 
-#### Adversarial trained (AdvPHash)
+#### Adversarially trained (AdvPHash)
 ```bash
 python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_adv' --model='../train_verify/saved_models/base_adv/coco-pdq-ep8-photodna.pt'
 python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_adv'
 ```
 
 
-### (Optional) Existing PHash algorithms/models from others
-We also provide the implementation and evaluation scripts for existing PHash systems (PhotoDNA, PDQ, NuralHash). However, we cannot directly provide the extracted algorithms/models (following existing repos) due to the copy right issue.
+### (Optional) Existing PHash algorithms/models from other sources
+We also provide the implementation and evaluation scripts for existing PHash systems (PhotoDNA, PDQ, NuralHash). However, we cannot directly provide the extracted algorithms/models (following existing repos) due to copyright issues.
 
 #### PDQ
 
@@ -221,13 +221,13 @@ python benign0_func_AUC.py --dataset='coco_val' --target='pdq'
 
 #### PyPhotoDNA
 - We follow the [repo](https://github.com/jankais3r/pyPhotoDNA) to set up the PhotoDNA model. To set up this model, you will have to:
-  - Navigate to folder via `cd ../generate_phash` (assume you are at `attack` folder)
+  - Navigate to folder via `cd ../generate_phash` (assuming you are in the `attack` folder)
   - Install `wine64` if you are on a Linux via `sudo apt-get install wine-stable-dev`
-  - Run `install.bat` if you are on Windows, or `install.sh` if you are on a Linux. Then you should have a file with suffix `.dll` which is the PhotoDNA.
-  - (Skip this step at this time) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes. Remember to modify the image folder name and saved .csv file name in `get_photodna_hash.py` if you want to generate PHahses for your own datasets (Note: this step is needed if you want to generate the phash labels for NSFW datasets you collect).
+  - Run `install.bat` if you are on Windows, or `install.sh` if you are on a Linux. Then you should have a file with suffix `.dll` which contains the PhotoDNA.
+  - (Skip this step for now) Once the setup is complete, you can run `WINEDEBUG=-all wine64 python-3.9.12-embed-amd64/python.exe get_photodna_hash.py` to generate hashes. Remember to modify the image folder name and saved .csv file name in `get_photodna_hash.py` if you want to generate PHashes for your own datasets (Note: this step is needed if you want to generate the phash labels for NSFW datasets you collect).
 
-- For evaluating PhotoDNA on the COCO validation dataset, use these commands:
-  - First, please navigate back to `attack` folder via `cd ../attack`, generate and save the transformed images, then needs to use the generate_phash to get the .csv file.
+- For PhotoDNA evaluation on the COCO validation dataset, follow these steps:
+  - First, navigate back to `attack` folder via `cd ../attack`, generate and save the transformed images, then use generate_phash to get the .csv file.
   ```bash
   python benign0_func_check.py --dataset='coco_val' --target='photodna'
   ```
@@ -258,7 +258,7 @@ Please follow the guide provided by this [repo](https://github.com/ml-research/L
 
 To extract the NeuralHash model from a recent macOS or iOS build, please follow the conversion guide provided by AppleNeuralHash2ONNX. We will not provide any NeuralHash files or models, neither this repo nor by request. After extracting the onnx model, put the file model.onnx into `attack/models/`. Further, put the extracted Core ML file neuralhash_128x96_seed1.dat into `attack/models/coreml_model/`.
 
-To convert the onnx model into PyTorch, run the following command after creating folder models and putting model.onnx into it. The converted files will be stored at `attack/models/model.pth`:
+To convert the onnx model into PyTorch, run the following command after creating the `models` folder and placing model.onnx into the folder. The converted files will be stored at `attack/models/model.pth`:
 
 ```bash
 python utils/onnx2pytorch.py
@@ -273,7 +273,7 @@ python benign0_func_AUC.py --dataset='coco_val' --target='neuralhash_nn'
 
 ### Empirical attacks
 #### Empirical collision attacks
-To perform empirical collision attacks, first derive the hash values of a dataset of choice using `utils/compute_dataset_hashes.py` (only need once), and then run `attack/adv1_collision_attack.py` to perform empirical collision attacks. 
+To perform empirical collision attacks, first derive the hash values of a dataset of choice using `utils/compute_dataset_hashes.py` (you only need to do so once), and then run `attack/adv1_collision_attack.py` to perform empirical collision attacks. 
 
 Please refer to the scripts provided by `attack/adv1.sh` for more detailed command lines.
 
@@ -283,7 +283,7 @@ Run `attack/adv2_evasion_attack.py` to perform empirical evasion attacks.
 Again, please refer to the scripts provided by `attack/adv2.sh` for more detailed examples.
 
 ### Real-world evaluations on NSFW data
-In our work, we adopt the NSFW dataset together with the CelabA dataset to assess our model's ability in NSFW detection. Please follow the data preparation section for both datasets. 
+In our work, we adopt the NSFW dataset together with the CelabA dataset to assess our model's ability in NSFW detection. Please follow the instructions in the data preparation section for both datasets. 
 
 After getting the datasets, please run the following script to train the model:
 
