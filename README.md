@@ -122,7 +122,7 @@ It will take around five minutes to calculate the PHash from different levels of
 ```bash
 python ./attack/benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_cert_ep1'
 ```
-The expected output from console contains ROC-AUC of transformations tested in our papers RQ1, for example Hue:
+The expected output from console contains ROC-AUC of transformations tested in our papers RQ1. For instance, the output for the Hue transformation should be as follows:
 ```angular2html
 ...
 hue:  -180      -150      -120      -90       -60       -30       0         30        60        90        120       150       
@@ -142,7 +142,7 @@ The full results will be saved in `./attack/func_logs/coco_val_photodna_nn_cert_
 Instead of using our models, you can also train and verify from scratch.
 
 ### Normal and robust training
-Both normal and robust training is conducted by executing `./train_verify/train.py`. Different datasets require different configuration files, and normal versus robust training also each have their own specific configuration files. We provide the training script in `./train_verify/train.sh`, which includes command lines for both **Robust Training** and **Normal Training** using the COCO and MNIST dataset. 
+Both normal and robust training is conducted by executing `./train_verify/train.py`. Different datasets require different configuration files, and separate configuration files are used for normal and robust training. We provide the training script in `./train_verify/train.sh`, which includes command lines for both **Robust Training** and **Normal Training** using the COCO and MNIST dataset. 
 
 To illustrate, below are some examples on how to perform robust and normal training on different datasets.
 
@@ -231,7 +231,7 @@ python benign0_func_AUC.py --dataset='coco_val' --target='pdq'
   ```bash
   python benign0_func_check.py --dataset='coco_val' --target='photodna'
   ```
-  - Second, navigate to `generate_hash` via `cd ../generate_phash` and then run
+  - Second, navigate to `generate_phash` via `cd ../generate_phash` and then run
   ```bash
   main_root="../attack/func_logs/coco_val_photodna"
   for subroot in "$main_root"/*; do
@@ -264,7 +264,7 @@ To convert the onnx model into PyTorch, run the following command after creating
 python utils/onnx2pytorch.py
 ```
 
-After getting the models, to evaluate Neuralhash with the COCO validation dataset, run the following commands:
+After getting and correctly placing the two model files, to evaluate Neuralhash with the COCO validation dataset, run the following commands:
 ```bash
 python benign0_func_check.py --dataset='coco_val' --target='neuralhash_nn'
 python benign0_func_AUC.py --dataset='coco_val' --target='neuralhash_nn'
