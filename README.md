@@ -2,12 +2,9 @@
 
 
 <!-- CERTPHASH is the first certified perceptual hashing (PHash) system designed to provide provable robustness against both evasion and collision attacks. Using verifier tools, CERTPHASH is trained on a robust method that incorporates anti-evasion, anti-collision and functionality optimization terms, and is able to withstand adversarial perturbations while maintaining functional utility. Being the first certified PHash system with robust training, it is a powerful tool for detecting illicit content in real-world applications.  -->
-
 <!-- CertPhash is the first perceptual hashing (PHash) system designed with provable robustness against both evasion and collision attacks. -->
 
-CertPhash is the first certified perceptual hashing (PHash) system with robust training. CertPhash includes three different optimization terms, anti-evasion, anti-collision, and functionality. The anti-evasion term establishes an upper bound on the hash deviation caused by input perturbations, the anti-collision term sets a lower bound on the distance between a perturbed hash and those from other inputs, and the functionality term ensures that the system remains reliable and effective throughout robust training.
-This artifact includes the source code, dataset, setup, and instructions to implement and evaluate CertPHash. Our artifacts require a Linux machine with 64GB of RAM and a GPU with 40 GB of graphics memory.
-
+CertPhash is the first certified perceptual hashing (PHash) system with robust training. CertPhash includes three different optimization terms, anti-evasion, anti-collision, and functionality. The anti-evasion term establishes an upper bound on the hash deviation caused by input perturbations, the anti-collision term sets a lower bound on the distance between a perturbed hash and those from other inputs, and the functionality term ensures that the system remains reliable and effective throughout robust training. This artifact includes the source code, dataset, and models, along with instructions to set up the environment, implement, and evaluate CertPHash. Our artifacts require a Linux machine with 64GB of RAM and a GPU with 40 GB of graphics memory.
 
 ## Experiment Setup
 All experiments are run on a single NVIDIA A100-PCIE-40GB GPU with CUDA Version 12.1 and Driver Version 530.30.02.
@@ -300,8 +297,18 @@ python benign0_func_AUC.py --dataset='nsfw' --target='photodna_nn_cert_ep1'
 ```
 
 
-<!-- ## Citation
-Please don't forget to cite us if you use our code! -->
+## Citation
+Please don't forget to cite us if you find our code helpful!
+
+```
+@inproceedings{yang2024certphash,
+      title={CertPHash: Towards Certified Perceptual Hashing via Robust Training},
+      author={Yuchen Yang and Qichang Liu and Christopher Brix and Huan Zhang and Yinzhi Cao},
+      year={2025},
+      booktitle = {Proceedings of the USENIX Security Symposium (Usenix)}
+}
+```
+
 
 ## Implementation Credits
 Some of our implementations are built upon other repositories. We sincerely appreciate their contributions, and acknowledge these sources below. 
