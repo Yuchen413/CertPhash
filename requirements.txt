@@ -1,17 +1,18 @@
 torch==2.2.2
-torchvision==0.17.2
+torchvision
 numpy==1.24.3
-tensorboard==2.17.0
+tensorboard
 matplotlib==3.4.3
 tqdm
 termcolor
 gpustat
-onnx==1.16.2
-onnxruntime==1.20.1
+onnx
+onnxruntime
 scikit-learn
 jupyterlab
 seaborn
 git+https://github.com/aleju/imgaug.git
 scikit-image
 pandas
+opencv-python
 
