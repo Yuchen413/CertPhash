@@ -92,9 +92,9 @@ Please download this folder named `saved_models` and replace it with the existin
 ### 1. Testing the environment
 To test whether the environment has been set up correctly, please run the following for a demo robust training:
 ```bash
-bash ./train_verify/test.sh
+bash ./train_verify/test_env.sh
 ```
-The expected output for `./train_verify/test.sh` should be like `./train_verify/test/train_log.txt`, a.k.a. something like the following:
+The expected output for `./train_verify/test_env.sh` should be like `./train_verify/test/train_log.txt`, a.k.a. something like the following:
 ```angular2html
 Epoch 1, learning rate [0.0005], dir one_epoch_test
 [ 1]: eps=0.00000048 active=0.3465 inactive=0.6532 Loss=0.4681 Rob_Loss=0.4681 Err=1.0000 Rob_Err=1.0000 L_tightness=0.5494 L_relu=0.0023 L_std=0.8852 loss_reg=0.5518 grad_norm=15.2293 wnorm=13.1858 Time=0.0517
