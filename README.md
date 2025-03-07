@@ -105,9 +105,9 @@ Test without loss fusion
 
 ### 2. Testing the functionality
 
-- To test if our certified robust trained model functions as expected, please first run:
+- To test if our certified robust trained model functions as expected, please first go to the `attack` folder via `cd attack`, then run:
 ```bash
-python ./attack/benign0_func_check.py --dataset='coco_val' --target='photodna_nn_cert_ep1' --model='../train_verify/saved_models/coco_photodna_ep1/ckpt_best.pth'
+python benign0_func_check.py --dataset='coco_val' --target='photodna_nn_cert_ep1' --model='../train_verify/saved_models/coco_photodna_ep1/ckpt_best.pth'
 ```
 The expected output from console contains the name of transformations and a progress bar, for example:
 ```angular2html
@@ -119,7 +119,7 @@ It will take around five minutes to calculate the PHash from different levels of
 
 - Then calculate the ROC-AUC via:
 ```bash
-python ./attack/benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_cert_ep1'
+python benign0_func_AUC.py --dataset='coco_val' --target='photodna_nn_cert_ep1'
 ```
 The expected output from console contains ROC-AUC of transformations tested in our papers RQ1. For instance, the output for the Hue transformation should be as follows:
 ```angular2html
@@ -130,7 +130,6 @@ Mean ROC AUC: 1.0000, Std ROC AUC: 0.0000
 ...
 ```
 The full results will be saved in `./attack/func_logs/coco_val_photodna_nn_cert_ep1/coco_val_results.txt`. These results should align with our paper's RQ1.
-
 
 
 
