@@ -41,8 +41,6 @@ This will install all the necessary packages for training and evaluation.
 
 - After downloading the above link, you will need to unzip and named the folder as `data`, then replace the current folder `train_verify/data` with the downloaded one.
 
-- Note that for the COCO dataset, you will need to perform an *additional* step as described below.
-
 - The file hierarchy is specified by `./train_verify/data/put_data_here_follow_this.txt`, such as:
 
 ```
@@ -60,12 +58,12 @@ This will install all the necessary packages for training and evaluation.
     -mnist_test.csv
     -mnist_train.csv
 ```
-
+- **Note** that for the COCO training dataset (`coco100x100`), you will need to perform an **ADDITIONAL** step as described below.
 
 We use the following four datasets:
 
 - **COCO**: 
-  - Download images from this [link](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz) and unzip the file (named `coco100x100`).
+  - Download images from this [ADDITIONAL LINK](https://github.com/anishathalye/ribosome/releases/download/v1.0.0/coco100x100.tar.gz) and unzip the file (named `coco100x100`).
   - Place the folder under `train_verify/data`.
 
 - **MNIST**: 
@@ -85,8 +83,17 @@ We use the following four datasets:
 
 ### 3. Downloading our trained model
 We have released our certified robust trained model, adversarial trained model, and non-robust trained model in this [Download link.](https://drive.google.com/drive/folders/1b7RbO-uDdlvsxgsxE4H-tjrdGVx7pVRu?usp=sharing)
-Please download this folder named `saved_models` and replace it with the existing `./train_verify/saved_models`.
+Please download this folder named `saved_models` and replace it with the existing `./train_verify/saved_models`. Under this folder, the hierarchy is like:
 
+```
+-coco_photodna_ep8
+    -ckpt_best.pth
+    -...
+-mnist_pdq_ep8
+    -ckpt_best.pth
+    -...
+```
+where the subfolder is named following `dataName_phashType_trainingEpsilon`. `cpkt_best.pth` is the model weight that can be loaded for evaluation.
 
 ## Environment and Functionality Test
 ### 1. Testing the environment
@@ -162,7 +169,7 @@ An example of verifying the CNER for a perturbation epsilon of 0.0312 for a cert
 python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep8/ckpt_best.pth'
 ```
 
-To derive the CNCR, we run `verify_preimage.py` under `./train_verify`. An example of verifying the CNCR for a model trained on the MNIST dataset could be like this:
+To derive the CNCR, we run `verify_preimage.py` under `./train_verify`. An example of verifying the CNCR for a model trained on the MNIST dataset with randomly selected 10 samples (quick test) could be like this:
 ```bash
 python verify_preimage.py
 ```

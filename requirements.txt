@@ -2,7 +2,7 @@ torch==2.2.2
 torchvision
 numpy==1.24.3
 tensorboard
-matplotlib==3.4.3
+matplotlib
 tqdm
 termcolor
 gpustat

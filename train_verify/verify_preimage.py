@@ -100,9 +100,8 @@ def get_preimage(model_ori, val_dataloader, cut_eps, dummy_input, threshold=1):
     x_L_list = []
     x_U_list = []
     cls_list =[]
+
     for i, data in enumerate(tqdm(val_dataloader)):
-        if i >= 1000:
-            break
         try:
             x, y, cls = data
             x = x.cuda()
@@ -113,7 +112,6 @@ def get_preimage(model_ori, val_dataloader, cut_eps, dummy_input, threshold=1):
             upper = torch.clamp(x + cut_eps, max=1)
             ptb = PerturbationLpNorm(norm=norm, x_L=lower, x_U=upper, eps=cut_eps)
             bounded_x = BoundedTensor(x, ptb)
-
             # We need, |y-y_clean|<=90, that is {y-y_clean <=90 and y_clean-y <=90}
             # Two constraints as per inequalities for Hy+d<=0, That is y-(y_clean+90)<=0 and -y+(y_clean-90)<=0
             # So I have:
@@ -195,7 +193,12 @@ def main():
     opts.model = 'saved_models/mnist_pdq_ep8/ckpt_best.pth'
 
     val_data = ImageToHashAugmented_PDQ_with_class(opts.val_data, opts.data_dir, resize=opts.in_dim, num_augmented=0)
-    val_dataloader = DataLoader(val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
+
+    subset_val_data = Subset(val_data, random.sample(range(len(val_data)), 10))
+    val_dataloader = DataLoader(subset_val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
+
+    # val_dataloader = DataLoader(val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
+
     model = resnet(in_ch=1, in_dim=opts.in_dim)
     model_weights = torch.load(opts.model)
     model.load_state_dict(model_weights)
