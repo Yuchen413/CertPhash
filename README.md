@@ -169,11 +169,13 @@ An example of verifying the CNER for a perturbation epsilon of 0.0312 for a cert
 python verify_evasion.py --data=coco --epsilon=0.0312 --model='saved_models/coco_photodna_ep8/ckpt_best.pth'
 ```
 
-To derive the CNCR, we run `verify_preimage.py` under `./train_verify`. An example of verifying the CNCR for a model trained on the MNIST dataset with randomly selected 10 samples (quick test) could be like this:
+Evasion verification is less computationally expensive, requiring 2,544 MB of GPU memory with an estimated speed of 0.02s per example for the model mentioned above. This makes it feasible to run on many low-end GPUs. You may find more scripts for model verification in `./train_verify/verify.sh`.
+
+To derive the CNCR, we run `verify_preimage.py` under `./train_verify`. An example of verifying the CNCR for a model trained on the MNIST dataset could be like this:
 ```bash
-python verify_preimage.py
+python verify_preimage.py --verify_num_sample=10
 ```
-You may find more scripts for model verification in `./train_verify/verify.sh`.
+The above script verifies 10 randomly selected samples for a quick functionality test. Collision verification, however, is significantly more computationally expensive, requiring 34G GPU memory and an estimated speed of 395 seconds per example. We suggest to use a high-end GPU or better parallelization to efficiently handle a large number of verifications.
 
 
 

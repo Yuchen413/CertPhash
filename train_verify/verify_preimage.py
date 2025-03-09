@@ -46,6 +46,7 @@ def get_opts():
                         default=90, type=int)
     parser.add_argument('--model',
                         default='../train_verify/mnist_pdq_ep1/ckpt_best.pth', type=str)
+    parser.add_argument('--verify_num_sample', default=100, type=int)
     return parser.parse_args()
 
 
@@ -194,10 +195,9 @@ def main():
 
     val_data = ImageToHashAugmented_PDQ_with_class(opts.val_data, opts.data_dir, resize=opts.in_dim, num_augmented=0)
 
-    subset_val_data = Subset(val_data, random.sample(range(len(val_data)), 10))
-    val_dataloader = DataLoader(subset_val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
 
-    # val_dataloader = DataLoader(val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
+    subset_val_data = Subset(val_data, random.sample(range(len(val_data)), opts.verify_num_sample))
+    val_dataloader = DataLoader(subset_val_data, batch_size=opts.batch_size, shuffle=True, pin_memory=True)
 
     model = resnet(in_ch=1, in_dim=opts.in_dim)
     model_weights = torch.load(opts.model)
