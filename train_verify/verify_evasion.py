@@ -95,7 +95,7 @@ def get_evasion(model, val_dataloader, eps, dummy_input, threshold=90):
                 x = x.cuda()
                 norm = np.inf
                 # norm = 1
-                ptb = PerturbationL0Norm(norm=norm, eps=eps)
+                ptb = PerturbationL0Norm(eps=eps)
                 bounded_image = BoundedTensor(x, ptb)
                 y_clean = post_pdq(model(x))
                 lb, ub = model.compute_bounds(x=(bounded_image,), method='CROWN')
