@@ -122,7 +122,9 @@ Original: 100%|█████████████████████�
 Rotate: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:00<00:00, 32099.27it/s]
 ...
 ```
-It will take around five minutes to calculate the PHash from different levels of different transformations. The generated hashes will be saved under folder `./attack/func_logs/coco_val_photodna_nn_cert_ep1`.
+It will take around five minutes to calculate the PHash from different levels of different transformations. The generated hashes will be .csv files saved under folder `./attack/func_logs/coco_val_photodna_nn_cert_ep1`.
+
+Before proceeding to the next step, please check the folder to see if coco_val_original.csv is saved and NOT empty. If it is empty, you may need to delete the folder and rerun the script.
 
 - Then calculate the ROC-AUC via:
 ```bash
