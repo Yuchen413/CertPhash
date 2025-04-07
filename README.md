@@ -6,6 +6,13 @@
 
 CertPhash is the first certified perceptual hashing (PHash) system with robust training. CertPhash includes three different optimization terms, anti-evasion, anti-collision, and functionality. The anti-evasion term establishes an upper bound on the hash deviation caused by input perturbations, the anti-collision term sets a lower bound on the distance between a perturbed hash and those from other inputs, and the functionality term ensures that the system remains reliable and effective throughout robust training. This artifact includes the source code, dataset, and models, along with instructions to set up the environment, implement, and evaluate CertPHash. Our artifacts require a Linux machine with 64GB of RAM and a GPU with 40 GB of graphics memory.
 
+The artifact includes the following three folders:
+
+- `generate_phash`: PHash generation using existing algorithms.
+- `train_verify`: Train and verify the CertPhash.
+- `attack`: Functionality and empirical attack evaluations.
+
+
 ## Experiment Setup
 All experiments are run on a single NVIDIA A100-PCIE-40GB GPU with CUDA Version 12.1 and Driver Version 530.30.02.
 
